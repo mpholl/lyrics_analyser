@@ -1,0 +1,7 @@
+data/*
+figures/*
+
+*.csv
+*.npy
+*.png
+*.pdf
