@@ -35,7 +35,10 @@ for i in range(playlist_lyrics.shape[0]):
         except:
             pass
         try:
+            print(len(song.lyrics.split(' ')))
             playlist_lyrics[i, -1] = song.lyrics
+            with open(f"lyrics/{playlist_lyrics[i, -2]}.txt", "w") as lyrics_file:
+                lyrics_file.write(song.lyrics)
         except AttributeError:
             idx_nolyrics += [i]
         np.save(db_path, playlist_lyrics)
