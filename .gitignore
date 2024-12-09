@@ -1,6 +1,6 @@
 data/*
 figures/*
-
+lyrics/*
 *.csv
 *.npy
 *.png
