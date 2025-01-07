@@ -5,7 +5,7 @@ from lyricsgenius import Genius
 
 # authentification data for lyricsgenius
 
-token = 'jQpQXlSYZlws2chOgcawaoODy1O7ULkNn-vIlE04P9510jnGdEf53NVvBh9iuP1B'
+token = 'epcJuY5iMfHrodv1JlmIJjSWct7OGMbwRbGd82MNw4kht6f-B9SzFCFs4c7JkfV1'
 
 genius = Genius(token)
 
