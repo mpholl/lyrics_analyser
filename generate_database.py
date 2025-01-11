@@ -4,13 +4,16 @@ import pandas as pd
 from lyricsgenius import Genius
 
 # authentification data for lyricsgenius
+# ToDo: put token in file
+with open('genius_token.txt', 'r') as token_file:
+    token = token_file.read()
 
-token = 'jQpQXlSYZlws2chOgcawaoODy1O7ULkNn-vIlE04P9510jnGdEf53NVvBh9iuP1B'
-
+print(token)
 genius = Genius(token)
 
 # read playlist
-
+# to download the playlist, go to https://www.tunemymusic.com/transfer/spotify-to-file 
+# and follow instructions there
 db_path = './data/BATMAN_db.npy'
 
 playlist = np.array(pd.read_csv('./data/BATMAN_playlist.csv'))
@@ -27,7 +30,7 @@ else:
 idx_nolyrics = []
 
 
-
+song = None
 for i in range(playlist_lyrics.shape[0]):
     if playlist_lyrics[i, -1] == None:
         try:
