@@ -8,7 +8,12 @@ from lyricsgenius import Genius
 with open('genius_token.txt', 'r') as token_file:
     token = token_file.read()
 
+<<<<<<< HEAD
 print(token)
+=======
+token = 'epcJuY5iMfHrodv1JlmIJjSWct7OGMbwRbGd82MNw4kht6f-B9SzFCFs4c7JkfV1'
+
+>>>>>>> b7b186006846f5f1bbe9dd1698e53c432768a0c4
 genius = Genius(token)
 
 # read playlist
