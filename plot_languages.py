@@ -9,7 +9,10 @@ def count_languages(lyrics_list):
     # get the languages from the lyrics
     language_list = []
     for lyrics in lyrics_list:
-        language = detect(lyrics)
+        if lyrics == '':
+            language = 'None'
+        else:
+            language = detect(lyrics)
         # print(language)
         language_list += [language]
 
@@ -24,7 +27,7 @@ def count_languages(lyrics_list):
         else:
             element_count[item] = 1
     
-    return element_count
+    return element_count, language_list
 
 def iso_to_language_name(iso_code):
     try:
@@ -46,9 +49,11 @@ for i in range(playlist_lyrics.shape[0]):
         with open(f"lyrics/{playlist_lyrics[i, -2]}.txt", "r") as lyrics_file:
             lyrics_ += [lyrics_file.read()]
     except FileNotFoundError:
-        pass
+        lyrics_ += ['']
 
-language_counts = count_languages(lyrics_)
+language_counts, language_list = count_languages(lyrics_)
+
+np.savetxt('languages.txt', language_list, fmt='%s')
 
 language_counts = dict(sorted(language_counts.items(), key=lambda x:x[1], reverse=True))
 
