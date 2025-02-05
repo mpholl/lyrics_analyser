@@ -34,7 +34,7 @@ def iso_to_language_name(iso_code):
         language = pycountry.languages.get(alpha_2=iso_code)
         return language.name
     except AttributeError:
-        return "Unknown Language"
+        return "Unknown"
 
 plt.style.use('thesisplots')
 
@@ -73,8 +73,12 @@ plt.xticks(rotation=70, ha='right')
 
 plt.ylim(top=40)
 
-plt.tight_layout()
+for i, number in enumerate(song_numbers):
+    if number>39:
+        plt.text(language_names[i], 41, f'{number}', fontsize=16, rotation=70, ha='center')
 
+plt.tight_layout()
+plt.savefig('figures/languages_bars.png')
 plt.show()
 
 
