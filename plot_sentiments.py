@@ -109,13 +109,15 @@ def sort_columns_by_variance(array):
 
 sentiments = np.load('sentiments.npy')
 
+
 fixed_labels = np.array([
-    "admiration", "amusement", "anger", "annoyance", "approval", 
-    "caring", "confusion", "curiosity", "desire", "disappointment", 
-    "disapproval", "disgust", "embarrassment", "excitement", "fear", 
-    "gratitude", "grief", "joy", "love", "nervousness", "optimism", 
-    "pride", "realization", "relief", "remorse", "sadness", "surprise", 
-    "neutral"
+    "anger",
+    "fear",
+    "neutral",
+    "disgust",
+    "surprise",
+    "sadness",
+    "joy"
 ])
 
 

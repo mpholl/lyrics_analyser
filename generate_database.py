@@ -16,7 +16,7 @@ genius = Genius(token)
 # and follow instructions there
 db_path = './data/BATMAN_db.npy'
 
-playlist = np.array(pd.read_csv('./data/BATMAN_playlist.csv'))
+playlist = np.array(pd.read_csv('./data/BATMAN_playlist.csv',header=None))
 print(f"the shape of the playlist is {playlist.shape}")
 
 if os.path.exists(db_path):

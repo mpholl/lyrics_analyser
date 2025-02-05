@@ -12,7 +12,8 @@ tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)  # Use slo
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
 # Create the pipeline
-classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, top_k=None, truncation=True)
+classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, top_k=None, truncation=True, return_all_scores=True)
+# classifier = pipeline("text-classification", model=model_name, top_k=None, truncation=True, return_all_scores=True)
 
 
 db_path = './data/BATMAN_db.npy'
@@ -25,16 +26,18 @@ print(playlist_lyrics.shape[0])
 
 # Define the fixed order of emotion labels (from GoEmotions dataset)
 fixed_labels = [
-    "admiration", "amusement", "anger", "annoyance", "approval", 
-    "caring", "confusion", "curiosity", "desire", "disappointment", 
-    "disapproval", "disgust", "embarrassment", "excitement", "fear", 
-    "gratitude", "grief", "joy", "love", "nervousness", "optimism", 
-    "pride", "realization", "relief", "remorse", "sadness", "surprise", 
-    "neutral"
+    "anger",
+    "fear",
+    "neutral",
+    "disgust",
+    "surprise",
+    "sadness",
+    "joy"
 ]
 
 
 sentiments = np.zeros((playlist_lyrics.shape[0], len(fixed_labels)))
+sentiments[:] = np.nan
 for i in range(playlist_lyrics.shape[0]):
     print('='*30)
     print(playlist_lyrics[i,0], '\n')
