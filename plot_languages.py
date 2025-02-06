@@ -78,7 +78,7 @@ for i, number in enumerate(song_numbers):
         plt.text(language_names[i], 41, f'{number}', fontsize=16, rotation=70, ha='center')
 
 plt.tight_layout()
-plt.savefig('figures/languages_bars.png')
+plt.savefig('figures/languages_bars.png', facecolor='white')
 plt.show()
 
 

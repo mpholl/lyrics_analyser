@@ -40,6 +40,11 @@ def count_countries(isrc_list):
     return element_count
 
 plt.style.use('thesisplots')
+fig = plt.figure()
+figsize = fig.get_size_inches()
+plt.close()
+
+fig = plt.figure(figsize=(figsize[0]*2, figsize[1]))
 
 db_path = './data/BATMAN_db.npy'
 
@@ -62,8 +67,10 @@ plt.bar(country_names, song_numbers)
 
 plt.xticks(rotation=70, ha='right')
 
-plt.tight_layout()
 
+plt.ylabel('Songs')
+plt.tight_layout()
+plt.savefig('figures/countries_bars.png', facecolor="white")
 plt.show()
 
 
