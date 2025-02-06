@@ -32,16 +32,25 @@ artist_counts = count_artists(playlist_lyrics[:,1])
 
 artist_counts = dict(sorted(artist_counts.items(), key=lambda x:x[1], reverse=True))
 
-artist_names = np.array([key for key in artist_counts.keys()])
+artist_names = np.array([key.replace('&', '\&') for key in artist_counts.keys()])
 
 song_numbers = np.array([value for value in artist_counts.values()])
 
-plt.bar(artist_names[np.where(song_numbers>1)], song_numbers[np.where(song_numbers>1)])
+plt.style.use('thesisplots')
+fig = plt.figure()
+figsize = fig.get_size_inches()
+plt.close()
+
+# fig = plt.figure(figsize=(figsize[0]*2, figsize[1]))
+min_songs = 2
+
+plt.bar(artist_names[np.where(song_numbers>min_songs)], song_numbers[np.where(song_numbers>min_songs)])
 
 plt.xticks(rotation=70, ha='right')
+plt.ylabel('Songs')
 
 plt.tight_layout()
-
+plt.savefig('figures/artists_bars.png', facecolor='white')
 plt.show()
 
 
