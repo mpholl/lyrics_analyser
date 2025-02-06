@@ -46,7 +46,7 @@ playlist_lyrics = np.load(db_path, allow_pickle=True)
 lyrics_ = []
 for i in range(playlist_lyrics.shape[0]):
     try:
-        with open(f"lyrics/{playlist_lyrics[i, -2]}.txt", "r") as lyrics_file:
+        with open(f"lyrics700/{playlist_lyrics[i, -2]}.txt", "r") as lyrics_file:
             lyrics_ += [lyrics_file.read()]
     except FileNotFoundError:
         lyrics_ += ['']
@@ -66,6 +66,13 @@ for i in range(len(language_names)):
 print(language_names)
 
 song_numbers = list(language_counts.values())
+
+fig = plt.figure()
+figsize = fig.get_size_inches()
+plt.close()
+
+fig = plt.figure(figsize=(figsize[0]*1.5, figsize[1]))
+
 
 plt.bar(language_names, song_numbers)
 
