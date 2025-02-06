@@ -23,7 +23,7 @@ for i in range(playlist_lyrics.shape[0]):
         # replace hyphens
         lyrics = lyrics.replace('-', ' ')
         nr_words = len(lyrics.split(' '))
-        nr_na += [playlist_lyrics[i, -1].lower().count("na")]
+        nr_na += [lyrics.lower().count("na")]
         freq_na += [nr_na[-1]/nr_words]
         if nr_na[-1]> 300:
             print('#'*20)
