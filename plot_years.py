@@ -25,7 +25,7 @@ high = max(years)//10*10 + 11
 
 
 
-plt.hist(years, bins=np.arange(low, high, 5))
+plt.hist(years, bins=np.arange(low, high, 10))
 plt.xlabel('Years')
 plt.ylabel('Number of songs')
 
