@@ -16,7 +16,7 @@ classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, t
 # classifier = pipeline("text-classification", model=model_name, top_k=None, truncation=True, return_all_scores=True)
 
 
-db_path = './data/BATMAN_db.npy'
+db_path = './data/BATMAN700_db.npy'
 
 playlist_lyrics = np.load(db_path, allow_pickle=True)
 

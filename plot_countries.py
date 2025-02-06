@@ -46,7 +46,7 @@ plt.close()
 
 fig = plt.figure(figsize=(figsize[0]*2, figsize[1]))
 
-db_path = './data/BATMAN_db.npy'
+db_path = './data/BATMAN700_db.npy'
 
 playlist_lyrics = np.load(db_path, allow_pickle=True)
 

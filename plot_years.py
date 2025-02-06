@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 plt.style.use('thesisplots')
 
-db_path = './data/BATMAN_db.npy'
+db_path = './data/BATMAN700_db.npy'
 
 playlist_lyrics = np.load(db_path, allow_pickle=True)
 

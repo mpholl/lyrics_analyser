@@ -38,7 +38,7 @@ def iso_to_language_name(iso_code):
 
 plt.style.use('thesisplots')
 
-db_path = './data/BATMAN_db.npy'
+db_path = './data/BATMAN700_db.npy'
 
 playlist_lyrics = np.load(db_path, allow_pickle=True)
 
@@ -53,7 +53,7 @@ for i in range(playlist_lyrics.shape[0]):
 
 language_counts, language_list = count_languages(lyrics_)
 
-np.savetxt('languages.txt', language_list, fmt='%s')
+np.savetxt('languages700.txt', language_list, fmt='%s')
 
 language_counts = dict(sorted(language_counts.items(), key=lambda x:x[1], reverse=True))
 
