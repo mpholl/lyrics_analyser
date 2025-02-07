@@ -36,7 +36,9 @@ print(f'{maxcount} songs were recorded in {maxyear}')
 low = min(years)//10*10
 high = max(years)//10*10 + 11
 
-
+for i in range(len(years)): 
+    if years[i]<1960:
+        print(f'{years[i]}: {playlist_lyrics[i, 0:2]}')
 
 plt.hist(years, bins=np.arange(low, high, 10))
 plt.xlabel('Decade Recorded')
