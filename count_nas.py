@@ -37,4 +37,40 @@ for i in range(playlist_lyrics.shape[0]):
         freq_na += [np.nan]
 
 plt.hist(nr_na)
+plt.xlabel('Number of "na"')
+plt.ylabel('Songs')
+plt.tight_layout()
+plt.savefig('figures/absolute_nas_hist.png', facecolor='white')
+plt.close()
+
+nr_na = np.array(nr_na)
+nr_na[np.where(np.isnan(nr_na))] = 0
+freq_na = np.array(freq_na)
+freq_na[np.where(np.isnan(freq_na))] = 0
+absolute_idx = np.argsort(nr_na)
+absolute_idx = absolute_idx[::-1]
+
+relative_idx = np.argsort(freq_na)
+relative_idx = relative_idx[::-1]
+
+fig = plt.figure()
+figsize = fig.get_size_inches()
+plt.close()
+
+fig = plt.figure(figsize=(figsize[0]*1.5, figsize[1]))
+
+plt.barh(playlist_lyrics[absolute_idx[:10][::-1], 0], nr_na[absolute_idx[:10][::-1]])
+plt.yticks(ha='right', fontsize=16)
+plt.xlabel('Number of "na"')
+plt.tight_layout()
+plt.savefig('figures/absolute_nas.png', facecolor='white')
+plt.show()
+
+fig = plt.figure(figsize=(figsize[0]*1.5, figsize[1]))
+
+plt.barh(playlist_lyrics[relative_idx[:10][::-1], 0], freq_na[relative_idx[:10][::-1]])
+plt.yticks(ha='right', fontsize=16)
+plt.xlabel('"na" per word')
+plt.tight_layout()
+plt.savefig('figures/relative_nas.png', facecolor='white')
 plt.show()
