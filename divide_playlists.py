@@ -49,13 +49,14 @@ def iso_to_language_name(iso_code):
     except AttributeError:
         return "Unknown"
 
-playlist_length = 80
+playlist_length = 70
 
 # load the playlist database
 db_path = './data/BATMAN_db.npy'
 
 playlist = np.load(db_path, allow_pickle=True)
 
+all_playlists = []
 # make list of indices
 
 idx_available = np.arange(playlist.shape[0])
@@ -79,12 +80,25 @@ idx_available = remove_value(idx_available, 0)
 
 
 # load introduction list 
-# try:
-#     introduction_list = np.array(pd.read_csv('./data/BATMAN500_introductions.csv'))
-# except FileNotFoundError:
-#     introduction_list = np.array([])
-# and remove from list
+introduction_list = np.array(pd.read_csv('./data/BATMAN500_introductions.csv'))
+introduction_ids = []
 
+for i in idx_available:
+    if playlist[i, -2] in introduction_list:
+        introduction_ids += [i]
+# and remove from list
+idx_available = remove_from_list(idx_available, introduction_ids)
+all_playlists += [introduction_list]
+
+# create disco dancy list
+disco_ = np.array(pd.read_csv('./playlists/BATMAN500_disco.csv'))
+disco_ids = []
+for i in idx_available:
+    if playlist[i, -2] in disco_[:,-1]:
+        disco_ids += [i]
+# and remove from list
+idx_available = remove_from_list(idx_available, disco_ids)
+all_playlists += [disco_]
 
 # create ultimate na list
 ultimate_na_ = [playlist[0]]
@@ -101,7 +115,26 @@ for i in idx_available:
 save_csv(ultimate_na_, 'playlists/BATMAN500_ultimate_na.csv')
 # and remove from list
 idx_available = remove_from_list(idx_available, ultimate_na_ids)
+all_playlists += [ultimate_na_]
 
+languages = np.loadtxt('languages.txt', dtype=str)
+# create unknown language list
+
+unknown_ = [playlist[0]]
+unknown_ids = []
+
+for i in idx_available:
+    language = iso_to_language_name(languages[i])
+    if language == 'Unknown':
+        unknown_ += [playlist[i]]
+        unknown_ids += [i]
+    if len(unknown_) > playlist_length:
+        break
+# save csv, with header
+save_csv(unknown_, 'playlists/BATMAN500_unknown.csv')
+# and remove from list
+idx_available = remove_from_list(idx_available, unknown_ids)
+all_playlists += [unknown_]
 
 # create the questionable list
 questionable_ = [playlist[0]]
@@ -132,6 +165,7 @@ for i in idx_available:
 save_csv(questionable_, 'playlists/BATMAN500_questionable.csv')
 # and remove from list
 idx_available = remove_from_list(idx_available, questionable_ids)
+all_playlists += [questionable_]
 
 # create negative vibes list
 negative_vibes_ = [playlist[0]]
@@ -155,14 +189,7 @@ for i in negativity_:
 save_csv(negative_vibes_, 'playlists/BATMAN500_negative_vibes.csv')
 # and remove from list
 idx_available = remove_from_list(idx_available, negative_vibes_ids)
-
-
-# create disco dancy list
-
-# save csv, with header
-
-# and remove from list
-
+all_playlists += [questionable_]
 
 # create decades list
 decades_ = [playlist[0]]
@@ -181,24 +208,9 @@ save_csv(decades_, 'playlists/BATMAN500_decades.csv')
 
 # and remove from list
 idx_available = remove_from_list(idx_available, decades_ids)
+all_playlists += [decades_]
 
-languages = np.loadtxt('languages.txt', dtype=str)
-# create unknown language list
 
-unknown_ = [playlist[0]]
-unknown_ids = []
-
-for i in idx_available:
-    language = iso_to_language_name(languages[i])
-    if language == 'Unknown':
-        unknown_ += [playlist[i]]
-        unknown_ids += [i]
-    if len(unknown_) > playlist_length:
-        break
-# save csv, with header
-save_csv(unknown_, 'playlists/BATMAN500_unknown.csv')
-# and remove from list
-idx_available = remove_from_list(idx_available, unknown_ids)
 
 # create increasing bpm list
 increasingbpm_ = [playlist[0]]
@@ -220,6 +232,7 @@ for i in available_bpm:
     increasingbpm_ids = [idx_available[i]]
 
 increasingbpm_ += [playlist[fastest_id]]
+all_playlists += [increasingbpm_]
 
 # save csv, with header
 save_csv(increasingbpm_, 'playlists/BATMAN500_increasingbpm.csv')
@@ -227,6 +240,11 @@ save_csv(increasingbpm_, 'playlists/BATMAN500_increasingbpm.csv')
 idx_available = remove_from_list(idx_available, increasingbpm_ids)
 
 print(len(idx_available))
+sum_lists = 0
+for tmp_list in all_playlists:
+    print(f'{len(tmp_list)}')
+    sum_lists += len(tmp_list)
 
+print(sum_lists)
 
 
