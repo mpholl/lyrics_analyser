@@ -1,6 +1,7 @@
 data/*
 figures/*
 lyrics/*
+playlists/*
 *.csv
 *.npy
 *.png

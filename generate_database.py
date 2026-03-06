@@ -11,12 +11,12 @@ with open('genius_token.txt', 'r') as token_file:
 print(token)
 genius = Genius(token)
 
-# read playlist
+# read playlist 
 # to download the playlist, go to https://www.tunemymusic.com/transfer/spotify-to-file 
 # and follow instructions there
-db_path = './data/BATMAN700_db.npy'
+db_path = './data/BATMAN1000_db.npy'
 
-playlist = np.array(pd.read_csv('./data/Batman_playlist700.csv',header=None))
+playlist = np.array(pd.read_csv('./data/Batman_playlist1000.csv',header=None))
 print(f"the shape of the playlist is {playlist.shape}")
 
 if os.path.exists(db_path):
@@ -33,6 +33,7 @@ idx_nolyrics = []
 song = None
 for i in range(playlist_lyrics.shape[0]):
     if playlist_lyrics[i, -1] == None:
+        print(f'{i}/{playlist_lyrics.shape[0]}')
         try:
             song = genius.search_song(playlist_lyrics[i, 0], playlist_lyrics[i, 1])
         except:
@@ -40,7 +41,7 @@ for i in range(playlist_lyrics.shape[0]):
         try:
             print(len(song.lyrics.split(' ')))
             playlist_lyrics[i, -1] = song.lyrics
-            with open(f"lyrics700/{playlist_lyrics[i, -2]}.txt", "w") as lyrics_file:
+            with open(f"lyrics1000/{playlist_lyrics[i, -2]}.txt", "w") as lyrics_file:
                 lyrics_file.write(song.lyrics)
         except AttributeError:
             idx_nolyrics += [i]

@@ -20,7 +20,7 @@ def find_duplicates(input_list):
     
     return duplicates
 
-db_path = './data/BATMAN_db.npy'
+db_path = './data/BATMAN1000_db.npy'
 
 playlist_lyrics = np.load(db_path, allow_pickle=True)
 

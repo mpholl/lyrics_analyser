@@ -80,7 +80,7 @@ idx_available = remove_value(idx_available, 0)
 
 
 # load introduction list 
-introduction_list = np.array(pd.read_csv('./data/BATMAN500_introductions.csv'))
+introduction_list = np.array(pd.read_csv('./playlists/BATMAN500_introductions.csv'))
 introduction_ids = []
 
 for i in idx_available:
@@ -239,10 +239,12 @@ save_csv(increasingbpm_, 'playlists/BATMAN500_increasingbpm.csv')
 # and remove from list
 idx_available = remove_from_list(idx_available, increasingbpm_ids)
 
+
+playlist_names = ['introductions', 'disco', 'ultimate na', 'unknown', 'questionable', 'negative vibes', 'decades', 'increasing bpm']
 print(len(idx_available))
 sum_lists = 0
-for tmp_list in all_playlists:
-    print(f'{len(tmp_list)}')
+for i, tmp_list in enumerate(all_playlists):
+    print(f'{playlist_names[i]}: {len(tmp_list)}')
     sum_lists += len(tmp_list)
 
 print(sum_lists)

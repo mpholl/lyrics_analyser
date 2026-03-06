@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+plt.style.use('thesisplots')
+
 def sort_columns_by_variance(array):
     """
     Sort the columns of a NumPy array by their variance in descending order.
@@ -48,4 +50,6 @@ for i in range(7):
     tmp_sentiments = sentiments[:, i]
     plt.hist(tmp_sentiments[np.where(tmp_sentiments > 0)], bins=n_bins)
     plt.xlabel(fixed_labels[i])
+    plt.tight_layout()
+    plt.savefig(f'figures/{fixed_labels[i]}.png', facecolor='white')
     plt.show()
